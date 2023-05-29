@@ -9,13 +9,13 @@ let articulosCarrito = [];
 cargarEventListeners();
 
 function cargarEventListeners() {
-     // Dispara cuando se presiona "Agregar Carrito"
+     // Trigger when click 'Add to cart'
      listaCursos.addEventListener('click', agregarCurso);
 
-     // Cuando se elimina un curso del carrito
+     //Delete item from cart
      carrito.addEventListener('click', eliminarCurso);
 
-     // Al Vaciar el carrito
+     // To empty cart
      vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
 
 }
@@ -23,19 +23,17 @@ function cargarEventListeners() {
 
 
 
-// Funciones
-// Función que añade el curso al carrito
+// Functions
+// Add item to cart
 function agregarCurso(e) {
      e.preventDefault();
-     // Delegation para agregar-carrito
      if(e.target.classList.contains('agregar-carrito')) {
           const curso = e.target.parentElement.parentElement;
-          // Enviamos el curso seleccionado para tomar sus datos
+          // Read data for course selected
           leerDatosCurso(curso);
      }
 }
 
-// Lee los datos del curso
 function leerDatosCurso(curso) {
      const infoCurso = {
           imagen: curso.querySelector('img').src,
@@ -60,22 +58,15 @@ function leerDatosCurso(curso) {
           articulosCarrito = [...articulosCarrito, infoCurso];
      }
 
-     // console.log(articulosCarrito)
-
-     
-
-     // console.log(articulosCarrito)
      carritoHTML();
 }
 
-// Elimina el curso del carrito en el DOM
+// Delete course from cart
 function eliminarCurso(e) {
      e.preventDefault();
      if(e.target.classList.contains('borrar-curso') ) {
-          // e.target.parentElement.parentElement.remove();
           const cursoId = e.target.getAttribute('data-id')
           
-          // Eliminar del arreglo del carrito
           articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId);
 
           carritoHTML();
@@ -83,7 +74,7 @@ function eliminarCurso(e) {
 }
 
 
-// Muestra el curso seleccionado en el Carrito
+// Show courses in the cart
 function carritoHTML() {
 
      vaciarCarrito();
@@ -106,13 +97,8 @@ function carritoHTML() {
 
 }
 
-// Elimina los cursos del carrito en el DOM
 function vaciarCarrito() {
-     // forma lenta
-     // contenedorCarrito.innerHTML = '';
 
-
-     // forma rapida (recomendada)
      while(contenedorCarrito.firstChild) {
           contenedorCarrito.removeChild(contenedorCarrito.firstChild);
       }
